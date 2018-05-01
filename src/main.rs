@@ -58,18 +58,19 @@ fn main() {
     let my_server = HelloServer::new();
     let shared_data = Arc::clone(&(my_server.preferred_greeting));
 
-    thread::spawn(move || {
-        thread::sleep(Duration::from_secs(10));
-        let mut greeting = shared_data.lock();
-        greeting.inner = "Gutentag, ".to_string();
-    });
-
     let conf = httpbis::ServerConf::default();
     let mut server = grpc::ServerBuilder::new_plain();
     server.http.conf = conf.clone();
     server.http.set_port(8080);
     server.add_service(HelloWorldServer::new_service_def(my_server));
     let _server = server.build().expect("Failed to build server");
+
+    
+    thread::spawn(move || {
+        thread::sleep(Duration::from_secs(10));
+        let mut greeting = shared_data.lock();
+        greeting.inner = "Gutentag, ".to_string();
+    });
 
     thread::spawn(|| {
         ping_server();

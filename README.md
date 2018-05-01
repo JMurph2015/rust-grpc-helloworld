@@ -18,6 +18,10 @@ this code as simple as possible so that it would be legible to relative
 noobs like me.
 
 ## Things to note
+* It seems to be crucial to grab a clone of the Arc<Mutex<T>> before
+passing it to the service startup.  It's probably due to "us" losing
+ownership after the call to ``HelloWorldServer::new_service_def()``.
+Just don't forget to do this, and you can make more clones of it later.
 * There is a custom build script, it has project-specific verbiage
 in there, so that will depend on your setup.
 * The nonsense around the ``.to_owned()`` on the String is magic to me, 
