@@ -2,6 +2,8 @@
 name = "grpc_test"
 version = "0.1.0"
 authors = ["Joseph Murphy <air.jmurph@gmail.com>"]
+license = "MIT"
+description = "A slightly more advanced HelloWorld for gRPC and Rust"
 
 [dependencies]
 grpc                = "0.*"
