@@ -82,7 +82,7 @@ fn ping_server() {
     let mut i = 0;
     loop {
         let mut args = HelloMessageArgs::new();
-        args.set_name(format!("Joe-{}", i));
+        args.set_name(format!("World-{}", i));
         i+=1;
         let resp = hello_client.hello_message(grpc::RequestOptions::default(), args);
         match resp.wait() {
